@@ -1,0 +1,25 @@
+server:
+  port: 8084
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT
+    username: root
+    password: root
+  #配置Mapper.xml映射文件
+  cache:
+    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 2000
+    database: 0
+mybatis:
+  mapper-locations: classpath*:mybatis/mapper/*.xml
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#context:
+#  listener:
+#    classes: com.example.common.UserRecordEvent
