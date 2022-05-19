@@ -19,7 +19,9 @@ mybatis:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
+com:
+  ymx:
+    demo: https://localhost:8080/user/1
 #context:
 #  listener:
 #    classes: com.example.common.UserRecordEvent

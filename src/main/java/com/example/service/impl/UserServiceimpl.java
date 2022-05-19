@@ -17,7 +17,9 @@ public class UserServiceimpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public void logInfo(UserRecordEvent userRecordEvent) {
-        System.out.println("UserServiceimpl.logInfo");
-        System.out.println(userRecordEvent);
+
+
     }
+
+
 }

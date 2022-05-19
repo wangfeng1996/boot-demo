@@ -1,10 +1,12 @@
 package com.example;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.example.dao.UserMapper;
 import com.example.pojo.User;
 import com.example.service.UserService;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jeecgframework.poi.excel.def.NormalExcelConstants;
@@ -19,7 +21,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @SpringBootTest(classes = BootDemoApplication.class)
@@ -138,15 +143,96 @@ class BootDemoApplicationTests {
         List<String> list = userService.list().stream().map(User::getId).collect(Collectors.toList());
 
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper();
-        queryWrapper.eq(User::getUserName,"李四").eq(User::getAddress,"beijing,2").in(User::getId,list);
+        queryWrapper.eq(User::getUserName, "李四").eq(User::getAddress, "beijing,2").in(User::getId, list);
         List<User> userList = userService.list(queryWrapper);
         System.out.println(userList);
 
 
-       // LambdaUpdateWrapper<User> wrapper = new LambdaUpdateWrapper<>();
-       //
-       //wrapper.eq(User::getUserName,"李四").set(User::getUserName,"王武").in(User::getId,list);
-       // userService.update(wrapper);
+        // LambdaUpdateWrapper<User> wrapper = new LambdaUpdateWrapper<>();
+        //
+        //wrapper.eq(User::getUserName,"李四").set(User::getUserName,"王武").in(User::getId,list);
+        // userService.update(wrapper);
     }
+
+
+    @Test
+    public void adJoinTest() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("hello");
+        list.add("world");
+        list.add("你好");
+        list.add("世界");
+
+        ArrayList<String> list1 = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); ) {
+            String concat = list.get(i).concat("-" + list.get(i + 1));
+            list1.add(concat);
+            i += 2;
+        }
+        System.out.println(list1);
+    }
+
+    @Test
+    public void batchDemo() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        List<User> userList = list.stream().map(s -> {
+            User user = new User();
+            user.setId(s);
+            user.setUserName("张三");
+            user.setAddress("北京");
+            return user;
+        }).collect(Collectors.toList());
+        System.out.println(userList);
+    }
+
+
+    @Test
+    public void streamDemo() {
+        new Random().ints(5, 10)
+                .distinct()
+                .limit(5)
+                .sorted()
+                .forEach(System.out::println);
+    }
+
+    @Test
+    public void setTest() {
+        HashSet<String> set = new HashSet<>();
+        set.add("hello");
+        set.add("world");
+        HashSet<String> hashSet = new HashSet<>(set);
+        System.out.println(hashSet);
+
+    }
+
+    @Test
+    public void switchCaseDemo() {
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        String state = "1";
+        wrapper.eq("2".equals(state), User::getId, 1).eq(User::getAddress, "123456");
+        List<User> list = userMapper.selectList(wrapper);
+        System.out.println(list);
+    }
+
+    /**
+     * 利用guava工具进行分页
+     */
+    @Test
+    public void GuavaPagination() {
+        List<User> list = userMapper.selectList(null);
+        List<List<User>> partition = Lists.partition(list, 2);
+        System.out.println(JSON.toJSONString(partition));
+    }
+
+
+    @Test
+    public  void saveBatch(){
+
+    }
+
 
 }
