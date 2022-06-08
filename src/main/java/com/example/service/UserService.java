@@ -11,4 +11,5 @@ import com.example.pojo.User;
  */
 public interface UserService extends IService<User> {
     void logInfo(UserRecordEvent userRecordEvent);
+
 }

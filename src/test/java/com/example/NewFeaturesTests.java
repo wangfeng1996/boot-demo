@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
+
 
 /**
  * @author wf
@@ -21,5 +23,13 @@ public class NewFeaturesTests {
     @Test
     public void nullJudge() {
         System.out.println(url);
+    }
+
+    @Test
+    public void mapTest() {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("1", "hello");
+        map.put("2", "name");
+        map.put("中国", "北京");
     }
 }
