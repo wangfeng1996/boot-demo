@@ -1,12 +1,15 @@
 package com.example;
 
+import com.alibaba.fastjson.JSON;
 import com.example.pojo.TraceBack;
 import com.example.pojo.User;
 import com.example.service.TraceBackService;
 import com.example.service.impl.UserServiceimpl;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +20,7 @@ import java.util.stream.Collectors;
  * @description
  */
 @SpringBootTest(classes = BootDemoApplication.class)
+@RunWith(SpringRunner.class)
 public class MybatisPlusTest {
     @Autowired
     private UserServiceimpl userServiceimpl;
@@ -70,6 +74,13 @@ public class MybatisPlusTest {
         List<User> userList = userServiceimpl.list().stream().
                 filter((user -> (!user.getUserName().equals("lisi") || !user.getUserName().equals("李四")))).collect(Collectors.toList());
         System.out.println(userList);
+    }
+
+    @org.junit.Test
+    public void jsontest() {
+        List<User> list = userServiceimpl.list();
+        Object json = JSON.toJSON(list);
+        System.out.println(json);
     }
 
 }
