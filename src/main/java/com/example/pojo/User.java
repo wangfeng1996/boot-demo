@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @TableName("tb_user")
+@Accessors(chain = true)
 public class User implements Serializable {
     private static final long serialVersionUID = -749670099270787896L;
     @TableId(value = "id", type = IdType.ASSIGN_ID)

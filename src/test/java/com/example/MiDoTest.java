@@ -6,6 +6,7 @@ package com.example;
  * @description
  */
 
+import com.example.pojo.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +27,8 @@ public class MiDoTest {
         list1.add("3");
         ArrayList list = new ArrayList<>(list1);
         System.out.println(list);
+        User user = new User();
+        User hello = user.setUserName("hello");
 
     }
 }
