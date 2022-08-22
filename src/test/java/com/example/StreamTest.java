@@ -38,4 +38,22 @@ public class StreamTest {
         System.out.println(integers1);
     }
 
+    @Test
+    public void test02() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+        list.add(6);
+
+        Map<Boolean, List<Integer>> map = list.stream().collect(Collectors.partitioningBy(result -> result > 2));
+        // 大于2的数字
+        System.out.println(map.get(true));
+        // 小于2的数字
+        System.out.println(map.get(false));
+    }
+
+
 }
