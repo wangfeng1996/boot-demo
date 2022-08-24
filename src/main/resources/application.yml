@@ -5,7 +5,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT
     username: root
-    password: root
+    password: wangfeng
   #配置Mapper.xml映射文件
   cache:
     type: redis
@@ -14,9 +14,10 @@ spring:
     port: 6379
     timeout: 2000
     database: 0
-mybatis:
-  mapper-locations: classpath*:mybatis/mapper/*.xml
+
+
 mybatis-plus:
+  mapper-locations: classpath*:com/example/**/xml/**Mapper.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 com:

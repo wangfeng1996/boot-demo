@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.pojo.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -53,6 +54,20 @@ public class StreamTest {
         System.out.println(map.get(true));
         // 小于2的数字
         System.out.println(map.get(false));
+    }
+
+    @Test
+    public void test03() {
+        ArrayList<User> users = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            User user = new User();
+            user.setId("1:"+i);
+            user.setUserName(i+"");
+            users.add(user);
+        }
+        System.out.println(users);
+        Map<String, String> collect = users.stream().collect(Collectors.toMap(User::getId, User::getUserName));
+        System.out.println(collect);
     }
 
 
